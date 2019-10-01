@@ -1,0 +1,17 @@
+@echo off
+title message
+echo Make sure the textfile is correct before you continue
+set/p "pass=Press enter......."
+
+set LIST="C:\Users\bgollap\Desktop\in.txt"
+rem modify with location of list, which is also a .txt file
+
+set FILESPATH="C:\Users\bgollap\Desktop\GAT Only"
+rem modify the previous line with the desired destination
+
+for %%i in (%LIST%) do set DEST=%%~ni
+for /F "usebackq delims==" %%i in (%LIST%) do (call :COPY_FILES "%%i")
+exit
+
+:COPY_FILES
+xcopy /qv %FILESPATH%\%1 .\%DEST%\
